@@ -1,4 +1,5 @@
 import os
+import random
 
 from datetime import datetime
 from cs50 import SQL
@@ -8,7 +9,9 @@ from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import apology, login_required, lookup, usd
+from helpers import clone
+
+clone()
 # Configure application
 app = Flask(__name__)
 
@@ -27,7 +30,6 @@ def after_request(response):
 
 
 # Custom filter
-app.jinja_env.filters["usd"] = usd
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
@@ -40,6 +42,14 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/run",methods=["POST"])
-def run():
+@app.route("/run", methods=["POST"])
+def run() -> None:
+    tmp_id = str(random.randint(0,999999)).zfill(6)
+    while os.path.exists(f"./alterlang-source/workspace/{tmp_id}"):
+        tmp_id = str(random.randint(0,999999)).zfill(6)
+    data = request.form.get("code")
+    print(data)
+    with open(f"./alterlang-source/workspace/{tmp_id}","w") as f:
+        f.write(data)
+    os.system(f"python ./alterlang-source/workspace/run.py {tmp_id}")
     return
