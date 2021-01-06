@@ -10,7 +10,7 @@ from werkzeug.exceptions import default_exceptions, HTTPException, InternalServe
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import clone
-
+import subprocess
 clone()
 # Configure application
 app = Flask(__name__)
@@ -48,13 +48,12 @@ def run():
     while os.path.exists(f"./alterlang-source/workspace/{tmp_id}"):
         tmp_id = str(random.randint(0,999999)).zfill(6)
     data = request.form.get("code")
-    print(data)
     with open(f"./alterlang-source/workspace/{tmp_id}.altr","w") as f:
         f.write(data)
-    import subprocess
-
-
     process = subprocess.Popen(f"python ./alterlang-source/workspace/run.py ./alterlang-source/workspace/{tmp_id}.altr", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = process.communicate()
-    print(out)
-    return redirect("/")
+    out = str(out)
+    out = out.lstrip("b'").rstrip("'").replace("\\r","\r").replace("\\n","\n")
+    out = str(out).split("\r\n")
+    os.remove(f"./alterlang-source/workspace/{tmp_id}.altr")
+    return render_template("out.html",out=out)
