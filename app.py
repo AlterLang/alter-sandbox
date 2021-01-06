@@ -43,13 +43,18 @@ def home():
 
 
 @app.route("/run", methods=["POST"])
-def run() -> None:
+def run():
     tmp_id = str(random.randint(0,999999)).zfill(6)
     while os.path.exists(f"./alterlang-source/workspace/{tmp_id}"):
         tmp_id = str(random.randint(0,999999)).zfill(6)
     data = request.form.get("code")
     print(data)
-    with open(f"./alterlang-source/workspace/{tmp_id}","w") as f:
+    with open(f"./alterlang-source/workspace/{tmp_id}.altr","w") as f:
         f.write(data)
-    os.system(f"python ./alterlang-source/workspace/run.py {tmp_id}")
-    return
+    import subprocess
+
+
+    process = subprocess.Popen(f"python ./alterlang-source/workspace/run.py ./alterlang-source/workspace/{tmp_id}.altr", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = process.communicate()
+    print(out)
+    return redirect("/")
