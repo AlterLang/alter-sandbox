@@ -56,4 +56,4 @@ def run():
     out = out.lstrip("b'").rstrip("'").replace("\\r","\r").replace("\\n","\n")
     out = str(out).split("\r\n")
     os.remove(f"./alterlang-source/workspace/{tmp_id}.altr")
-    return render_template("out.html",out=out)
+    return render_template("index.html",out=out)
