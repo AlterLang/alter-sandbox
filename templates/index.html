@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="styles.css" rel="stylesheet">
+</head>
+
 <body>
+    <div class="container">
 
-    <h2>Textarea</h2>
-    <p>The textarea element defines a multi-line input field.</p>
-
-    <form action="./run" method="POST">
-        <textarea name="code" rows="10" cols="30"></textarea>
-        <br><br>
-        <input type="submit">
-    </form>
-
-    {% for i in out %}
-    <p>{{ i }}</p>
-    {% endfor %}
+        <div class="d-flex justify-content-center">
+            <h2>Textarea</h2>
+        </div>
+        <div class="d-flex justify-content-center">
+            <form action="./run" method="POST">
+                <textarea name="code" rows="10" cols="30"></textarea>
+                <br><br>
+                <input type="submit">
+            </form>
+        </div>
+        {% for i in out %}
+        <div class="d-flex justify-content-center">
+            <p>{{ i }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
 </body>
 
 </html>
