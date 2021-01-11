@@ -1,0 +1,33 @@
+@media (prefers-color-scheme: light) {
+    body {
+      background-color: white;
+      color: black;
+    }
+  }
+body {
+    background-color: #121212;
+    color: #FFFFFF;
+}
+.d-flex justify-content-center {
+    background-color: #15202B;
+    color: #8899A6;
+    font-family: monospace; 
+    /* Font could also be: Monaco */
+}
+.button {
+    border-radius: 15px;
+    border-width: 4px;
+    border-color: grey;
+    color: white;
+    font-family: 'Times New Roman';
+}
+h1 {
+  text-decoration: underline;
+  font-style: italic;
+  text-shadow: 2px 2px navy;
+}
+textarea {
+  border-radius: 15px;
+  border-width: 5px;
+  border-color: 
+}
