@@ -48,6 +48,7 @@ def run():
     data = request.form.get("code")
     with open(f"./alterlang-source/workspace/{tmp_id}.altr","w") as f:
         f.write(data)
+    print(os.path.exists("./alterlang-source/workspace/run.py"), os.path.exists(f"./alterlang-source/workspace/{tmp_id}.altr"))
     process = subprocess.Popen(f"python ./alterlang-source/workspace/run.py ./alterlang-source/workspace/{tmp_id}.altr", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = process.communicate()
     out = str(out)
