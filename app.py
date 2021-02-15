@@ -49,13 +49,11 @@ def run():
     with open(f"./alterlang-source/workspace/{tmp_id}.altr","w") as f:
         f.write(data)
     print(os.path.exists("./alterlang-source/workspace/run.py"), os.path.exists(f"./alterlang-source/workspace/{tmp_id}.altr"))
-    process = subprocess.Popen("ls", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = process.communicate()
-    print(out)
     process = subprocess.Popen(
         ["python", "./alterlang-source/workspace/run.py", "./alterlang-source/workspace/"+tmp_id+".altr"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = process.communicate()
     out = str(out)
+    print("OUT::::: ", out)
     out = out.lstrip("b'").rstrip("'").replace("\\r","\r").replace("\\n","\n").lstrip('"').rstrip('"')
     out = str(out).split("\n")
     os.remove(f"./alterlang-source/workspace/{tmp_id}.altr")
